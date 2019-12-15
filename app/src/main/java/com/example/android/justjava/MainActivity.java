@@ -1,15 +1,16 @@
 package com.example.android.justjava;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * This app displays an order form to order coffee.
@@ -68,12 +69,19 @@ public class MainActivity extends AppCompatActivity {
         CheckBox chocolateCheckBox = (CheckBox) findViewById(R.id.chocolate);
         boolean hasChocolate = chocolateCheckBox.isChecked();
 
+        // Enter user name
+        EditText name = (EditText) findViewById(R.id.username);
+        String userName = name.getText().toString();
+
         // Calculate the price
         int price = calculatePrice(hasWhippedCream,hasChocolate);
 
         // Display the order summary on the screen
-        String message = createOrderSummary(price, hasWhippedCream, hasChocolate);
-        displayMessage(message);
+        String message = createOrderSummary(userName ,price, hasWhippedCream, hasChocolate);
+        String emailSubject = "JustJava order for " + userName;
+        composeEmail(emailSubject,message);
+
+
     }
 
     /**
@@ -102,8 +110,8 @@ public class MainActivity extends AppCompatActivity {
      * @param addChocolate    is whether or not to add chocolate to the coffee
      * @return text summary
      */
-    private String createOrderSummary(int price, boolean addWhippedCream, boolean addChocolate) {
-        String priceMessage = "Name: Lyla the Labyrinth";
+    private String createOrderSummary(String userName, int price, boolean addWhippedCream, boolean addChocolate) {
+        String priceMessage = "Name: " + userName;
         priceMessage += "\nAdd whipped cream? " + addWhippedCream;
         priceMessage += "\nAdd chocolate? " + addChocolate;
         priceMessage += "\nQuantity: " + quantity;
@@ -127,6 +135,16 @@ public class MainActivity extends AppCompatActivity {
     private void displayMessage(String message) {
         TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
         orderSummaryTextView.setText(message);
+    }
+
+    public void composeEmail(String emailSubject, String emailBody) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        intent.putExtra(Intent.EXTRA_SUBJECT, emailSubject);
+        intent.putExtra(Intent.EXTRA_TEXT, emailBody);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
 }
