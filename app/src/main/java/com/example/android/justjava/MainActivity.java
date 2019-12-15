@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * This app displays an order form to order coffee.
@@ -27,16 +28,32 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the plus button is clicked.
      */
     public void increment(View view) {
-        quantity = quantity + 1;
-        displayQuantity(quantity);
+        if (quantity == 100) {
+            Toast.makeText(getApplicationContext() ,
+                    "You cannot order more than 100 cups of coffee",
+                    Toast.LENGTH_SHORT).show();
+        }
+        else{
+            quantity += 1;
+            displayQuantity(quantity);
+        }
+
     }
 
     /**
      * This method is called when the minus button is clicked.
      */
     public void decrement(View view) {
-        quantity = quantity - 1;
-        displayQuantity(quantity);
+        if (quantity == 1) {
+            Toast.makeText(getApplicationContext() ,
+                    "You have to order at least one cup of coffee",
+                    Toast.LENGTH_SHORT).show();
+
+        }
+        else{
+            quantity -= 1;
+            displayQuantity(quantity);
+        }
     }
 
     /**
@@ -52,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         boolean hasChocolate = chocolateCheckBox.isChecked();
 
         // Calculate the price
-        int price = calculatePrice();
+        int price = calculatePrice(hasWhippedCream,hasChocolate);
 
         // Display the order summary on the screen
         String message = createOrderSummary(price, hasWhippedCream, hasChocolate);
@@ -61,11 +78,20 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Calculates the price of the order.
-     *
+     * @param whiteCream to check if the users wanted whiteCream
+     * @param chocolate to check if the users wanted chocolate
      * @return total price
      */
-    private int calculatePrice() {
-        return quantity * 5;
+    private int calculatePrice(boolean whiteCream, boolean chocolate) {
+        int totalPrice = 5;
+        if (whiteCream){
+            totalPrice += 1;
+        }
+        if (chocolate){
+            totalPrice += 2;
+        }
+        totalPrice = totalPrice *quantity;
+        return totalPrice;
     }
 
     /**
