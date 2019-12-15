@@ -81,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
         String emailSubject = "JustJava order for " + userName;
         composeEmail(emailSubject,message);
 
-
     }
 
     /**
@@ -127,14 +126,6 @@ public class MainActivity extends AppCompatActivity {
         TextView quantityTextView = (TextView) findViewById(
                 R.id.quantity_text_view);
         quantityTextView.setText("" + numberOfCoffees);
-    }
-
-    /**
-     * This method displays the given text on the screen.
-     */
-    private void displayMessage(String message) {
-        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
-        orderSummaryTextView.setText(message);
     }
 
     public void composeEmail(String emailSubject, String emailBody) {
