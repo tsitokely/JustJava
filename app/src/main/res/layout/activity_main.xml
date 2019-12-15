@@ -18,13 +18,13 @@
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name"
+            android:hint="@string/text_name"
             android:textAllCaps="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="toppings"
+            android:text="@string/text_toppings"
             android:textAllCaps="true" />
 
         <CheckBox
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:paddingLeft="24sp"
-            android:text="Whipped Cream"
+            android:text="@string/text_cream"
             android:textAllCaps="false"
             android:textSize="16sp" />
 
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:paddingLeft="24sp"
-            android:text="Chocolate"
+            android:text="@string/text_chocolate"
             android:textAllCaps="false"
             android:textSize="16sp" />
 
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="quantity"
+            android:text="@string/text_quantity"
             android:textAllCaps="true" />
 
         <LinearLayout
@@ -65,15 +65,14 @@
                 android:layout_height="48dp"
                 android:layout_marginRight="8dp"
                 android:onClick="decrement"
-                android:text="-"
-                android:textAllCaps="true" />
+                android:text="-" />
 
             <TextView
                 android:id="@+id/quantity_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="8dp"
-                android:text="2"
+                android:text="@string/initial_quantity_value"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@android:color/black" />
 
@@ -81,8 +80,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:onClick="increment"
-                android:text="+"
-                android:textAllCaps="true" />
+                android:text="+" />
 
         </LinearLayout>
 
@@ -91,7 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:onClick="submitOrder"
-            android:text="order"
+            android:text="@string/text_order"
             android:textAllCaps="true" />
 
     </LinearLayout>

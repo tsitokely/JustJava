@@ -1,3 +1,33 @@
-<resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Just Java</string>
+    <string name="user_name">Name: <xliff:g id="username" example="Jason">%s</xliff:g></string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="thank_you">\nThank you Very much!</string>
+    <string name="initial_quantity_value">2</string>
+
+    <!--Text part -->
+    <!--Text Menu -->
+    <string name="text_name">Name</string>
+    <string name="text_quantity">Quantity</string>
+    <string name="text_order">Order</string>
+    <string name="text_toppings">Toppings</string>
+
+    <!--Text Toppings -->
+    <string name="text_chocolate">Chocolate</string>
+    <string name="text_cream">Whipped Cream</string>
+
+    <!--Toast Messages -->
+    <string name="increment_boundary">You cannot order more than 100 cups of coffee</string>
+    <string name="decrement_boundary">You have to order at least one cup of coffee</string>
+
+    <!--email part -->
+    <string name="email_subject">Just Java order for <xliff:g id="username" example="Jason">%s</xliff:g></string>
+    <string name="add_white_cream">\nDo you Want to add white cream? </string>
+    <string name="add_chocolate">\nDo you Want to add chocolate? </string>
+    <string name="quantity">\nQuantity: <xliff:g id="quantity" example="2">%d</xliff:g></string>
+    <string name="total_dollar">\nTotal: $<xliff:g id="price" example="$10">%i</xliff:g></string>
+
+
 </resources>

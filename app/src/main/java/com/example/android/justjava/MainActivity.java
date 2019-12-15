@@ -29,16 +29,8 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the plus button is clicked.
      */
     public void increment(View view) {
-        if (quantity == 100) {
-            Toast.makeText(getApplicationContext() ,
-                    "You cannot order more than 100 cups of coffee",
-                    Toast.LENGTH_SHORT).show();
-        }
-        else{
-            quantity += 1;
-            displayQuantity(quantity);
-        }
-
+        quantity = quantity + 1;
+        displayQuantity(quantity);
     }
 
     /**
@@ -46,15 +38,11 @@ public class MainActivity extends AppCompatActivity {
      */
     public void decrement(View view) {
         if (quantity == 1) {
-            Toast.makeText(getApplicationContext() ,
-                    "You have to order at least one cup of coffee",
-                    Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(this,getString(R.string.decrement_boundary), Toast.LENGTH_SHORT).show();
+            return;
         }
-        else{
-            quantity -= 1;
-            displayQuantity(quantity);
-        }
+        quantity = quantity - 1;
+        displayQuantity(quantity);
     }
 
     /**
@@ -78,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Display the order summary on the screen
         String message = createOrderSummary(userName ,price, hasWhippedCream, hasChocolate);
-        String emailSubject = "JustJava order for " + userName;
+        String emailSubject = getString(R.string.email_subject,userName);
         composeEmail(emailSubject,message);
 
     }
@@ -110,12 +98,14 @@ public class MainActivity extends AppCompatActivity {
      * @return text summary
      */
     private String createOrderSummary(String userName, int price, boolean addWhippedCream, boolean addChocolate) {
-        String priceMessage = "Name: " + userName;
-        priceMessage += "\nAdd whipped cream? " + addWhippedCream;
-        priceMessage += "\nAdd chocolate? " + addChocolate;
-        priceMessage += "\nQuantity: " + quantity;
-        priceMessage += "\nTotal: $" + price;
-        priceMessage += "\nThank you!";
+        String priceMessage = getString(R.string.user_name,userName);
+        priceMessage += getString(R.string.add_white_cream) +
+                        ((addWhippedCream) ? getString(R.string.yes) : getString(R.string.no));
+        priceMessage += getString(R.string.add_chocolate) +
+                ((addChocolate) ? getString(R.string.yes) : getString(R.string.no));
+        priceMessage += getString(R.string.quantity,quantity);
+        priceMessage += getString(R.string.total_dollar,price);
+        priceMessage += getString(R.string.thank_you);
         return priceMessage;
     }
 
@@ -123,9 +113,8 @@ public class MainActivity extends AppCompatActivity {
      * This method displays the given quantity value on the screen.
      */
     private void displayQuantity(int numberOfCoffees) {
-        TextView quantityTextView = (TextView) findViewById(
-                R.id.quantity_text_view);
-        quantityTextView.setText("" + numberOfCoffees);
+        TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
+        quantityTextView.setText(numberOfCoffees);
     }
 
     public void composeEmail(String emailSubject, String emailBody) {
