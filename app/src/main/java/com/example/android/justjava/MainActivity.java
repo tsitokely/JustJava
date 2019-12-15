@@ -1,11 +1,3 @@
-/**
- * IMPORTANT: Make sure you are using the correct package name.
- * This example uses the package name:
- * package com.example.android.justjava
- * If you get an error when copying this code into Android studio, update it to match teh package name found
- * in the project's AndroidManifest.xml file.
- **/
-
 package com.example.android.justjava;
 
 
@@ -13,7 +5,9 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
@@ -36,12 +30,11 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
+
+        CheckBox WhippedCream = (CheckBox) findViewById(R.id.whipped_cream);
+        boolean wantWhippedCream = WhippedCream.isChecked();
         int orderPrice = calculatePrice();
-        String orderSummaryMessage =
-                "Name: Kaptain Kunal" +
-                "\nQuantity: " + numberOfCoffees +
-                "\nTotal: $" + orderPrice +
-                "\nThank you!";
+        String orderSummaryMessage = createOrderSummary(orderPrice,wantWhippedCream);
         displayMessage(orderSummaryMessage);
     }
 
@@ -83,5 +76,20 @@ public class MainActivity extends AppCompatActivity {
     private void displayMessage(String message) {
         TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
         orderSummaryTextView.setText(message);
+    }
+
+    /**
+     * Create summary of the order
+     *
+     * @param orderPrice price of the order
+     * @param checked is whether the user checked a checkbox or not
+     * @return text summary
+     */
+    private String createOrderSummary(int orderPrice, boolean checked){
+        return "Name: Kaptain Kunal" +
+        "\nAdd whipped cream? " + checked +
+        "\nQuantity: " + numberOfCoffees +
+        "\nTotal: $" + orderPrice +
+        "\nThank you!";
     }
 }
